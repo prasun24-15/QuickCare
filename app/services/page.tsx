@@ -51,7 +51,7 @@ export default function About() {
     { title: "Lab Report Analyser", description: "Understand your lab reports easily.", icon: <FileText className="w-6 h-6" />, href: "/labreport" },
     { title: "Online Pharmacy", description: "Get medicines delivered instantly.", icon: <Bell className="w-6 h-6" />, href: "/Onlinepharmacy" },
     { title: "Diet Planner", description: "Achieve your health goals naturally.", icon: <Activity className="w-6 h-6" />, href: "/diet" },
-    { title: "Mental Health Check-In", description: "Take a quick self-assessment quiz.", icon: <Brain className="w-6 h-6" />, href: "/mentalhealth-quiz.tsx" },
+    // { title: "Mental Health Check-In", description: "Take a quick self-assessment quiz.", icon: <Brain className="w-6 h-6" />, href: "/mentalhealth-quiz.tsx" },
   ]
 
   return (
