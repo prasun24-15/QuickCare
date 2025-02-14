@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Video, Calendar, Brain, FileText, Bell, Activity } from "lucide-react"
 import { useRouter } from "next/navigation"
 import gsap from "gsap"
+import MentalHealthQuiz from "../components/mental-health-quiz"
 
 interface ServiceCardProps {
   title: string
@@ -117,13 +118,13 @@ export default function About() {
     },
     {
       title: "Book Labtest",
-      description: "Book our varoius pathology services anytime, anywhere.",
+      description: "Book our various pathology services anytime, anywhere.",
       icon: <FileText className="w-6 h-6" />,
       href: "/consultation",
     },
     {
       title: "Lab Report Analyser",
-      description: "Securely Understand your Lab report with authentic information anytime, anywhere.",
+      description: "Securely understand your lab report with authentic information anytime, anywhere.",
       icon: <FileText className="w-6 h-6" />,
       href: "/labreport",
     },
@@ -160,25 +161,17 @@ export default function About() {
             We are dedicated to revolutionizing healthcare through innovative technology. Our mission is to make quality
             healthcare accessible to everyone, anytime, anywhere.
           </p>
-          <p className="text-xl text-gray-800 leading-relaxed">
-            With a team of experienced healthcare professionals and cutting-edge technology experts, we strive to create
-            solutions that empower patients and support healthcare providers in delivering the best possible care.
-          </p>
         </div>
         <h2 ref={titleRef} className="text-4xl font-bold text-center mb-12 text-blue-800 drop-shadow-md">
           Our Services
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service, index) => (
-            <ServiceCardPreview
-              key={index}
-              title={service.title}
-              description={service.description}
-              icon={service.icon}
-              href={service.href}
-            />
+            <ServiceCardPreview key={index} {...service} />
           ))}
         </div>
+        <h1 className="text-3xl font-bold text-center mt-12">Mental Health Check-In</h1>
+        <MentalHealthQuiz />
       </div>
     </div>
   )
