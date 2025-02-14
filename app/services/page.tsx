@@ -6,7 +6,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Video, Calendar, Brain, FileText, Bell, Activity } from "lucide-react"
 import { useRouter } from "next/navigation"
 import gsap from "gsap"
-import MentalHealthQuiz from "../components/mental-health-quiz"
+import MentalHealthQuiz from "../components/mentalhealth-quiz";
+
 
 interface ServiceCardProps {
   title: string
