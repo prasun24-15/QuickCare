@@ -1,9 +1,7 @@
-"use client";
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Calendar, Clock, Star, DollarSign, Activity } from "lucide-react";
-import gsap from "gsap";
+import { Calendar, Clock, Star, DollarSign, Activity, MessageCircle } from "lucide-react";
 
 type Doctor = {
   _id: string;
@@ -76,43 +74,10 @@ export default function AppointmentsPage() {
   const [appointments, setAppointments] = useState<Appointment[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  
-  const appointmentRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const headerRef = useRef<HTMLHeadingElement>(null);
-  const buttonRef = useRef<HTMLButtonElement>(null);
 
-  useEffect(() => {
-    if (headerRef.current) {
-      gsap.from(headerRef.current, {
-        opacity: 0,
-        y: -20,
-        duration: 0.6
-      });
-    }
-
-    if (buttonRef.current) {
-      gsap.from(buttonRef.current, {
-        opacity: 0,
-        y: 20,
-        duration: 0.4,
-        delay: 0.2
-      });
-    }
-  }, []);
-
-  useEffect(() => {
-    setTimeout(() => {
-      appointmentRefs.current.forEach((element, index) => {
-        if (element) {
-          gsap.fromTo(
-            element,
-            { opacity: 0, scale: 0.95 },
-            { opacity: 1, scale: 1, duration: 0.5, delay: index * 0.1 }
-          );
-        }
-      });
-    }, 100);
-  }, [appointments]);
+  const handleChatWithDoctor = () => {
+    window.open('https://1095.3cx.cloud/prasunsingh', '_blank');
+  };
 
   const loadAppointments = () => {
     try {
@@ -172,10 +137,7 @@ export default function AppointmentsPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50">
       <div className="relative z-10 max-w-4xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-        <h1 
-          ref={headerRef}
-          className="text-4xl font-bold text-center mb-8 text-blue-600"
-        >
+        <h1 className="text-4xl font-bold text-center mb-8 text-blue-600 animate-fade-in">
           My Appointments
         </h1>
         
@@ -185,7 +147,11 @@ export default function AppointmentsPage() {
               {appointments.map((appointment, index) => (
                 <div
                   key={appointment.id}
-                  ref={el => { appointmentRefs.current[index] = el; }}
+                  className="transform transition-all duration-300 hover:scale-[1.02] opacity-0 animate-fade-in"
+                  style={{
+                    animationDelay: `${index * 100}ms`,
+                    animationFillMode: 'forwards'
+                  }}
                 >
                   <Card className="bg-white shadow-lg border-0">
                     <CardHeader className="flex flex-row items-center gap-4">
@@ -216,6 +182,15 @@ export default function AppointmentsPage() {
                           </div>
                         ))}
                       </div>
+                      <div className="mt-4 flex justify-end">
+                        <Button
+                          onClick={handleChatWithDoctor}
+                          className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-colors duration-200"
+                        >
+                          <MessageCircle className="w-4 h-4" />
+                          Chat with Doctor
+                        </Button>
+                      </div>
                     </CardContent>
                   </Card>
                 </div>
@@ -229,9 +204,8 @@ export default function AppointmentsPage() {
 
           <div className="mt-8 text-center">
             <Button
-              ref={buttonRef}
               onClick={handleBookAppointment}
-              className="relative z-20 bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg text-lg font-semibold"
+              className="relative z-20 bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg text-lg font-semibold transition-all duration-300 hover:scale-105"
             >
               Book New Appointment
             </Button>
